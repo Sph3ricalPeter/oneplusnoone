@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "connectionTimeout": 5,
+            "database": "8jdyVkqPuG",
+            "dialect": "MySQL",
+            "name": "simple-blog",
+            "password": "aqCtuEef9y",
+            "port": 3306,
+            "server": "remotemysql.com",
+            "username": "8jdyVkqPuG"
+        }
+    ]
+}

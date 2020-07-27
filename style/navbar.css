@@ -1,0 +1,92 @@
+.navbar {
+  height: 100px;
+  padding: 0 25px;
+  box-sizing: border-box;
+  transition: all 0.1s ease-in-out;
+}
+
+.navbar-menu {
+  height: 100%;
+  width: 1200px;
+  margin-left: calc((100% - 1200px) / 2);
+  float: left;
+}
+
+.navbar-logo {
+  height: 100%;
+  transition: all 0.1s ease-in-out;
+}
+
+.navbar-right {
+  height: 100%;
+  float: right;
+  display: table;
+}
+
+.navbar-login {
+  height: 100%;
+  float: right;
+  display: table;
+  cursor: pointer;
+}
+
+.dropdown-button {
+  transition: all 0.3s ease-in-out;
+}
+
+.dropdown-content {
+  display: none;
+  top: 85px;
+  right: -15px;
+  width: 150px;
+  position: absolute;
+  border-radius: 5px;
+  box-shadow: 0px 1px 10px 0px rgba(33, 33, 33, 0.75);
+  z-index: 99;
+  background: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.dropdown-content-scroll {
+  top: 65px !important;
+}
+
+.login-dropdown-button:hover .dropdown-content {
+  display: block;
+  background: rgba(22, 22, 22, 1);
+}
+
+.dropdown-content a {
+  display: block !important;
+  padding: 15px;
+  z-index: 99;
+}
+
+.navbar-right a {
+  width: 125px;
+}
+
+.navbar-right a,
+.navbar-login a,
+.navbar-login span {
+  position: relative;
+  vertical-align: middle;
+  display: table-cell;
+  font-weight: normal;
+  font-size: 24px;
+  text-align: center;
+  transition: all 0.1s ease-in-out;
+}
+
+.navbar-right .current {
+  font-weight: bold;
+  background: -webkit-linear-gradient(rgb(255, 0, 64), rgb(78, 95, 255));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navbar-scroll {
+  background: rgba(22, 22, 22, 1);
+  height: 70px;
+  box-shadow: 0px 10px 15px rgba(255, 255, 255, 0.10);
+}

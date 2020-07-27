@@ -1,0 +1,65 @@
+.post {
+    margin: 0 auto;
+    margin-top: 10%;
+    width: 90%;
+}
+
+.post-head {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    height: 400px;
+    border-radius: 15px;
+    padding: 25px;
+    padding-top: 300px;
+    box-sizing: border-box;
+}
+
+.post-head h1 {
+    margin: 0;
+}
+
+.post-head p, .comment-meta {
+    color: rgb(200, 200, 200);
+    font-style: italic;
+}
+
+.post-content {
+    padding: 25px;
+}
+
+form {
+    width: 90%;
+    margin: 0 auto;
+}
+
+input {
+    margin: 0 auto;
+    width: 100%;
+}
+
+textarea {
+    height: 100px;
+}
+
+.comments {
+    margin: 0 auto;
+    width: 90%;
+}
+
+.comment {
+    margin: 25px 0;
+    width: 100%;
+}
+
+.comment * {
+    padding-left: 25px;
+}
+
+.comment-meta {
+    font-size: 16px;
+}
+
+.comment td {
+    float: left;
+}

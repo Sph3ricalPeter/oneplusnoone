@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Blog - Dokumentace</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body class="vscode-light">
+        <h1 id="blog---dokumentace">Blog - Dokumentace</h1>
+<p><a href="http://wa.toad.cz/~jezekpe6">zpět na blog</a></p>
+<h2 id="1-popis-%c3%balohy---blog-s-koment%c3%a1%c5%99i">1. Popis úlohy - Blog s komentáři</h2>
+<ol>
+<li>
+<p>Cíl: Cílem projektu je vytvořit jednoduchý blog umožňující administrátorovi a editorům přidávat příspěvky a přihlášeným uživatelům tyto příspěvky komentovat</p>
+</li>
+<li>
+<p>Uživatelské role:</p>
+</li>
+</ol>
+<ul>
+<li>Nepřihlášený uživatel</li>
+<li>Přihlášený uživatel (user, editor, admin)</li>
+</ul>
+<ol start="3">
+<li>Funkce:</li>
+</ol>
+<ul>
+<li>příspěvek obsahuje thumbnail, název příspěvku, datum přidání, kategorii a text</li>
+<li>komentář obsahuje jméno autora, datum a čas přidání a text</li>
+<li>hlavní stránka blogu obsahuje několik příspěvků, seznamy jsou stránkovány</li>
+<li>příspěvek má pod obsahem sekci komentářů</li>
+</ul>
+<ol start="4">
+<li>Funkce podle rolí:</li>
+</ol>
+<ul>
+<li>Admin a editor mohou přidávat, upravovat a odebírat příspěvky</li>
+<li>Přihlášený uživatel, admin a editor mohou komentovat příspěvky</li>
+<li>Všichni mohou číst příspěvky</li>
+<li>Nepřihlášení uživatelé se mohou registrovat a posléze přihlásit</li>
+<li>Admin může mazat účty a pověřovat uživatele rolemi</li>
+</ul>
+<ol start="5">
+<li>Akceptační podmínky
+Projekt je akceptovatelný pokud splňuje všechny body zadání.</li>
+</ol>
+<h2 id="2-u%c5%beivatelsk%c3%a1-p%c5%99%c3%adru%c4%8dka">2. <a href="http://wa.toad.cz/~jezekpe6/manual.html">Uživatelská příručka</a></h2>
+<h2 id="3-popis-implementace">3. Popis implementace</h2>
+<h3 id="1-frontend">1. Frontend:</h3>
+<p>Klientská část webu využívá čistého HTML/HTML5, CSS a JavaScriptu s použitím jQuery frameworku.</p>
+<p>HTML zpravidla sestává z head sekce s nalinkovaným CSS a jQuery / AJAX, dále sekcí body, která obsahuje PHP import šablony horní navigace a footeru a dále hlavní <code>&lt;main&gt;</code> sekci obsahující hlavní content stránky.</p>
+<p>CSS styly jsou linkované z externích souborů a jsou rozdělené do souborů podle sekcí webu, kterých se týkají.
+Je hojně využit <code>display: table</code> s <code>vertical-align: middle</code> a několik animací jako &quot;slide-in&quot; animace při načtení hlavní stránky blogu, nebo animace hlavního submit tlačítka např. u loginu. CSS animace jsou realizovány pomocí transitions a změny atributů např. přidáním třídy.</p>
+<pre><code class="language-JavaScript"><div><span class="hljs-comment">// includes/navbar.php - top navbar animation trigger after scrolling 100px from window's top via jQuery</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">updateNavbar</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> scroll = $(<span class="hljs-built_in">window</span>).scrollTop();
+    <span class="hljs-keyword">if</span> (scroll &gt; <span class="hljs-number">100</span>) {
+        $(<span class="hljs-string">'#navbar'</span>).addClass(<span class="hljs-string">'navbar-scroll'</span>);
+        $(<span class="hljs-string">'#login-dropdown-content'</span>).addClass(<span class="hljs-string">'dropdown-content-scroll'</span>);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (scroll &lt; <span class="hljs-number">100</span>) {
+        $(<span class="hljs-string">'#navbar'</span>).removeClass(<span class="hljs-string">'navbar-scroll'</span>);
+        $(<span class="hljs-string">'#login-dropdown-content'</span>).removeClass(<span class="hljs-string">'dropdown-content-scroll'</span>);
+    }
+}
+</div></code></pre>
+<p>Elementy jsou selectovány téměř výhradně pomocí tříd.</p>
+<p>Při registraci je použit JavaScript pro real-time validaci obsahu formulářových polí. Email je ověřen funkcí match s regexovým výrazem:</p>
+<pre><code class="language-JavaScript"><div><span class="hljs-comment">// register.php - email format regex</span>
+<span class="hljs-keyword">var</span> emailFormat = <span class="hljs-regexp">/^(([^&lt;&gt;()\[\]\\.,;:\s@"]+(\.[^&lt;&gt;()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/</span>;
+<span class="hljs-keyword">if</span> (!email.value.match(emailFormat)) {
+    errElems.push(email);
+    showErrMsg(<span class="hljs-string">'&amp;#9888;  Email format is invalid!'</span>);
+}
+</div></code></pre>
+<p>Ostatní parametry musí mít nějakou nejmenší délku atd.</p>
+<p>Dále je pak javascript použit pro asynchronní AJAX dotazy při mazání příspěvků nebo uživatelů.</p>
+<pre><code class="language-JavaScript"><div><span class="hljs-comment">// user/editor/posts.php - delete post AJAX GET request with url: delpost.php?key=id</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">delpost</span>(<span class="hljs-params">id, title</span>) </span>{
+    <span class="hljs-keyword">if</span> (confirm(<span class="hljs-string">"Are you sure you want to delete '"</span> + title + <span class="hljs-string">"'"</span>)) {
+        $.ajax({
+            <span class="hljs-attr">type</span>: <span class="hljs-string">'GET'</span>,
+            <span class="hljs-attr">url</span>: <span class="hljs-string">'delpost.php'</span>,
+            <span class="hljs-attr">data</span>: {
+                <span class="hljs-attr">key</span>: id
+            },
+            <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+                <span class="hljs-built_in">window</span>.location.href = <span class="hljs-string">'posts.php'</span>;
+            }
+        });
+    }
+}
+</div></code></pre>
+<p>Web funguje i bez přítomnosti JavaScriptu a vyhodí nad horní nabídkou červenou lištu upozorňující na fakt, že web funguje nejlépe s JavaScriptem.</p>
+<h3 id="2-backend">2. Backend:</h3>
+<p>Serverová část je veskrze čisté PHP. Aplikace využívá dvě PHP třídy: <code>class.user.php</code> a <code>class.db.php</code>. Třída user uvěřuje přihlášení a poté uchovává data přihlášeného uživatele a umožňuje snadné ověření, jestli je uživatel přihlášen. Třida db je jakási zajímavost a je to na míru ušitý wrapper databáze, který provádí předdefinované dotazy voláním funkcí a vrací již parsovaná data.</p>
+<p>Údaje o uživateli jako jeho <code>memeberID</code> nebo <code>username</code> jsou uloženy v proměnné <code>$_SESSION</code> spolu s údajem <code>loggedin</code>, který je použit právě ve tříde <code>class.user.php</code> pro ověření přihlášeného uživatele.</p>
+<p>Většina nastavení aplikace se nachází v <code>includes/config.php</code>, kde jsou i definované údaje pro připojení do databáze.
+Dále jsou tu načítány třídy pomocí <code>spl_autoload_register</code> funkce a definované konstanty. <code>config.php</code> je pak includován do většiny ostatních souborů, kde jsou poté dostupné všechy definované konstanty a proměnné.</p>
+<p>Ve složce <code>includes/</code> jsou také přítomny dvě šablony: <code>navbar.php</code> a <code>footer.php</code>, které jsou includovány na stránkách.
+<code>navbar.php</code> využívá definované PHP konstanty <code>$WEB_ROOT</code> pro relativní odkazy.</p>
+<pre><code class="language-PHP"><div><span class="hljs-comment">// relative path to $WEB_ROOT allows including from different directiores</span>
+&lt;a href=<span class="hljs-string">"&lt;?php echo $WEB_ROOT; ?&gt;user/logout.php"</span>&gt;log out&lt;/a&gt;
+</div></code></pre>
+<p>Chyby jsou zachytávány a errorové zprávy jsou přidávány do pole a posléze zobrazeny formátovaně v blízkosti formuláře / místa, kde chyby vznikly.</p>
+<pre><code class="language-PHP"><div>&lt;!-- <span class="hljs-keyword">print</span> errors formatted within the form --&gt;
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>($err_msgs)) {
+    <span class="hljs-keyword">foreach</span> ($err_msgs <span class="hljs-keyword">as</span> $err_msg) {
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">'&lt;p class="embed-err"&gt;&amp;#9888; '</span> . $err_msg . <span class="hljs-string">'&lt;/p&gt;'</span>;
+    }
+}
+</div></code></pre>
+<p>Všechny výpisy proměnných jsou realizované pomocí <code>htmlspecialchars()</code> funkce a XSS by nemělo být možné.
+Při neúspěšném odeslání formuláře zůstanou hodnoty vyplněné (krom hesel). To je možné načtením z pole <code>$_POST</code> z odeslaného formuláře:</p>
+<pre><code class="language-PHP"><div><span class="hljs-comment">// register.php - data load from $_POST after unsuccesful validation</span>
+&lt;input id=<span class="hljs-string">"email"</span> type=<span class="hljs-string">'text'</span> name=<span class="hljs-string">'email'</span> value=<span class="hljs-string">'&lt;?php if (isset($err_msgs)) { echo htmlspecialchars($_POST['</span>email<span class="hljs-string">']); } ?&gt;'</span> autofocus&gt;
+</div></code></pre>
+<p>Je implementována možnost registrace / přihlášení. Údaje jsou po submitu nejprve zkontrolovány javascriptem, poté poslány metodou POST na server, kde jsou opět zkontrolovány a při absenci errorů je zavolána funkce v databázovém wrapperu nebo třídě user, které provedou přislušný dotaz. Heslo je v databázi uchováváno v osoleném zahashovaném stavu. Hash je generování pomocí built-in PHP funkce <code>password_hash($pass, PASSWORD_BCRYPT)</code> a ověřován pomocí <code>password_verify()</code>.</p>
+<pre><code class="language-PHP"><div><span class="hljs-comment">// register.php - on submit</span>
+<span class="hljs-keyword">if</span> (!<span class="hljs-keyword">isset</span>($err_msgs)) {
+    <span class="hljs-comment">// encrypt password using the PHP bcrypt hash algo which includes salt</span>
+    $hashedpassword = password_hash($password, PASSWORD_BCRYPT);
+
+    <span class="hljs-comment">// add user record into database</span>
+    <span class="hljs-keyword">if</span> ($db-&gt;addUser($email, $username, $hashedpassword)) {
+
+.
+.
+.
+
+<span class="hljs-comment">// classes/class.user.php - DB wrapper</span>
+<span class="hljs-comment">/* adds a user to the DB, storing email, username and hashed password */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addUser</span><span class="hljs-params">($email, $username, $hashedpassword)</span>
+    </span>{
+        <span class="hljs-keyword">try</span> {
+            $user_st = <span class="hljs-keyword">self</span>::$_con-&gt;prepare(<span class="hljs-string">'INSERT INTO blog_members (email,username,password) VALUES (:email, :username, :password)'</span>);
+            <span class="hljs-keyword">return</span> $user_st-&gt;execute(<span class="hljs-keyword">array</span>(
+                <span class="hljs-string">':email'</span> =&gt; $email,
+                <span class="hljs-string">':username'</span> =&gt; $username,
+                <span class="hljs-string">':password'</span> =&gt; $hashedpassword
+            ));
+        } <span class="hljs-keyword">catch</span> (PDOException $e) {
+            <span class="hljs-keyword">echo</span> $e-&gt;getMessage();
+        }
+    }
+</div></code></pre>
+<p>Web disponuje vzhledovým tématem, které lze navolit ve footeru kterékoliv stránky webu. Theme využívá cookies, které se při prvním navštívení nastaví defaultně &quot;no theme&quot;, a při změně uchová nastavení po dobu 60ti minut. Každá stránka poté hledá přítomnost <code>theme</code> cookie a podlě něj se rozhodne nalinkovat theme.css soubor.</p>
+<pre><code class="language-PHP"><div><span class="hljs-comment">// theme.php - theme setcookie with 60 minutes duration</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>($_POST[<span class="hljs-string">'theme'</span>])) {
+    <span class="hljs-keyword">if</span> ($_POST[<span class="hljs-string">'theme'</span>] == <span class="hljs-number">1</span>) {
+        setcookie(<span class="hljs-string">'theme'</span>, <span class="hljs-string">'1'</span>, time() + <span class="hljs-number">3600</span>);
+    } <span class="hljs-keyword">else</span> {
+        setcookie(<span class="hljs-string">'theme'</span>, <span class="hljs-string">'0'</span>, time() + <span class="hljs-number">3600</span>);
+    }
+    header(<span class="hljs-string">'Location: index.php'</span>);
+}
+.
+.
+.
+<span class="hljs-comment">// include theme style in any page</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>($_COOKIE[<span class="hljs-string">'theme'</span>])) {
+    <span class="hljs-keyword">if</span> ($_COOKIE[<span class="hljs-string">'theme'</span>] == <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">'&lt;link rel="stylesheet" href="'</span> . $WEB_ROOT .  <span class="hljs-string">'style/theme.css"&gt;'</span>;
+    }
+}
+</div></code></pre>
+<p>Hlavní stránka webu využívá jednoduché stránkování realizované pomocí metody <code>$_GET</code>.</p>
+<pre><code class="language-PHP"><div><span class="hljs-comment">// index.php pagination</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>($_GET[<span class="hljs-string">'pageNumber'</span>])) {
+    $pageNumber = $_GET[<span class="hljs-string">'pageNumber'</span>];
+} <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// default page is 1st</span>
+    $pageNumber = <span class="hljs-number">1</span>;
+}
+</div></code></pre>
+<p>Příspěvky v sekci &quot;everything&quot; jsou poté zobrazeny stránkovaně pomocí proměnných <code>$offset</code> a <code>$nRecordsPerPage</code>, kde offset definuje index prvního příspěvku na stránce a je zobrazeno n příspěvků. Číslo stránky je uchováváno metodou <code>$_GET</code> a přeposíláno při změně stránky.</p>
+<p>Je použito uploadování souborů (obrázků) pomocí <code>move_uploaded_file()</code>, které jsou využity jako náhledové obrázky příspěvků.
+Případ kdy soubor není nahrán je ošetřen, a příspěvek poté není nahrán do databáze.
+V databázi je poté u příspěvku sloupec s umístěním náhladového obrázku a při zobrazení se z tohoto umístění obrázek načte pomocí <code>&lt;img src=&quot;umisteni&quot;&gt;</code>.
+Adresář definovaný pro ukládání náhledových obrázků je <code>images/</code>.</p>
+<pre><code class="language-PHP"><div><span class="hljs-comment">// user/editor/addpost.php - upload thumbnail</span>
+<span class="hljs-keyword">if</span> (!<span class="hljs-keyword">isset</span>($err_msg)) {
+    $file_uploaded = move_uploaded_file($_FILES[<span class="hljs-string">"postThumb"</span>][<span class="hljs-string">"tmp_name"</span>], $thumbPath);
+
+    <span class="hljs-keyword">if</span> ($file_uploaded) {
+        <span class="hljs-keyword">if</span> ($db-&gt;addPost($postTitle, $_SESSION[<span class="hljs-string">'memberID'</span>], $thumbUrl, $postCont)) {
+            header(<span class="hljs-string">'Location: '</span> . $WEB_ROOT);
+            <span class="hljs-keyword">exit</span>;
+        } <span class="hljs-keyword">else</span> {
+            $err_msg[] = <span class="hljs-string">'Database error.'</span>;
+        }
+    } <span class="hljs-keyword">else</span> {
+        $err_msg[] = <span class="hljs-string">'Failed to upload file.'</span>;
+    }
+}
+</div></code></pre>
+<h2 id="4-popis-%c3%balo%c5%bei%c5%a1t%c4%9b-dat">4. Popis úložiště dat</h2>
+<p>Databáze je v jazyce <code>MySQL</code> a obsahuje tabulky <code>blog_comments</code>, <code>blog_members</code> a <code>blog_posts</code>. Komentáře, uživatelé i příspěvky mají unikátní ID, pomocí kterých probíhá v databázi vyhledávání (dotazování). Ve složitějších dotazech typu: &quot;najdi komentáře k tomuto příspěvku&quot; je v dotazu použit <code>LEFT OUTER JOIN</code>.</p>
+<p><img src="http://wa.toad.cz/~jezekpe6/assets/doc/doc_1.png" alt="">
+<img src="http://wa.toad.cz/~jezekpe6/assets/doc/doc_2.png" alt="">
+<img src="http://wa.toad.cz/~jezekpe6/assets/doc/doc_3.png" alt="">
+<img src="http://wa.toad.cz/~jezekpe6/assets/doc/doc_4.png" alt=""></p>
+<p>Údaje k připojení jsou definovány v souboru <code>config.php</code>:</p>
+<pre><code class="language-PHP"><div><span class="hljs-comment">// includes/config.php DB consts definition</span>
+define(<span class="hljs-string">'DBHOST'</span>, <span class="hljs-string">'remotemysql.com'</span>);
+define(<span class="hljs-string">'DBUSER'</span>, <span class="hljs-string">'8jdyVkqPuG'</span>);
+define(<span class="hljs-string">'DBPASS'</span>, <span class="hljs-string">'aqCtuEef9y'</span>);
+define(<span class="hljs-string">'DBNAME'</span>, <span class="hljs-string">'8jdyVkqPuG'</span>);
+</div></code></pre>
+<p>Samotné připojení je pak realizování pomocí <code>PDO</code> ve wrapperu <code>classes/class.db.php</code>.</p>
+<p>Databáze je dotazována pouze wrapperem <code>classes/class.db.php</code>, jehož funkce volají ostatní skripty pokud chtějí data.</p>
+<p>Dalším využitým úložištěm je samotná složka aplikace, kam se do adresáře <code>images/</code> ukládají náhledové obrázky k příspěvkům.</p>
+<p><a href="http://wa.toad.cz/~jezekpe6">zpět na blog</a></p>
+
+    </body>
+    </html>

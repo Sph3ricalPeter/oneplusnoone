@@ -1,0 +1,8 @@
+.wideform-section {
+    margin: 0 auto;
+    width: 80%;
+}
+
+textarea {
+    height: 300px;
+}

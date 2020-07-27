@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Blog - Manuál</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="blog---manu%c3%a1l">Blog - Manuál</h1>
+<p><a href="http://wa.toad.cz/~jezekpe6">zpět na blog</a></p>
+<h2 id="1-obecn%c3%a9">1. Obecné</h2>
+<p>Na celém webu nalezneme u horního okraje stránky horní menu, které obsahuje logo webu, odkazy na tento manuál, dokumentaci a blog.
+Na pravé straně tohoto horního menu pak nalezneme uživatelskou sekci, kde nepřihlášený uživatel uvidí &quot;sign in&quot; odkaz, který ho navede na stránku
+s přihlášením. Přihlášení uživatelé pak v tomto pravém horním rohu uvidí svoje &quot;username&quot;. Při najetí na toho &quot;username&quot; se objeví nabídka s možnostmi
+podle úrovně pravomocí přihlášeného uživatele. Běžný &quot;user&quot; má pravomoc pouze komentovat, a v nabídce bude pouze možnost odhlásit se. Uživatel &quot;editor&quot;
+může spravovat příspěvky, proto se v nabídce objeví odkaz na stránku &quot;posts&quot;. Nakonec uživatel &quot;admin&quot; může spravovat uživatele, a v nabídce proto krom
+všeho co vidí editor a user, uvidí i odkaz na stránku &quot;users&quot;.</p>
+<p>Pro demonstraci jsou k dispozici 3 předvytvořené účty:</p>
+<ol>
+<li>user (username: user, password: user)</li>
+<li>editor (username: editor, password: editor)</li>
+<li>admin (username: admin, password: admin)</li>
+</ol>
+<p><img src="http://wa.toad.cz/~jezekpe6/assets/doc/man_1.png" alt=""></p>
+<p>Na celém webu také nalezneme patičku, kde můžeme měnit vzhled webu. Defaultní nastavení vzhledu je &quot;no theme&quot;.</p>
+<p><img src="http://wa.toad.cz/~jezekpe6/assets/doc/man_2.png" alt=""></p>
+<h2 id="2-%c3%9avodn%c3%ad-str%c3%a1nka---blog">2. Úvodní stránka - Blog</h2>
+<p>Úvodní stránka blogu je rozdělená na dve sekce: &quot;latest&quot; a &quot;everything&quot;.</p>
+<p><img src="http://wa.toad.cz/~jezekpe6/assets/doc/man_3.png" alt=""></p>
+<p>V sekci &quot;latest&quot; je poslední, nejnovější příspěvek a v sekci &quot;everything&quot;
+všechny příspěvky, stránkované po pěti od nejnovějšího k nejstaršímu, tedy nejstarší příspěvek nalezneme na poslední straně. Mezi stránkami příspěvků
+lze navigovat pomocí odkazů &quot;pages&quot; pod příspěvky. Bíle zvýrazněné číslo udává aktuální stránku. Kliknutím na obrázek nebo odkaz v názvu příspěvku se dostaneme na jeho náhled.</p>
+<p><img src="http://wa.toad.cz/~jezekpe6/assets/doc/man_4.png" alt=""></p>
+<h2 id="3-sign-in">3. Sign in</h2>
+<p>Tato stránka slouží k přihlášení uživatelů, kteří jsou již registrovaní. Obsahuje dvě kolonky - &quot;username&quot; na jméno a &quot;password&quot; na heslo. Obě jsou povinné.
+V případě chybové hlášky je jeden z údajů nebo oba údaje chybné. Uživatelé, kteří se chtějí zaregistrovat mohou kliknout na odkaz &quot;Dont have an accout yet?&quot;, který je dostane na stránku &quot;register&quot;.</p>
+<p><img src="http://wa.toad.cz/~jezekpe6/assets/doc/man_5.png" alt=""></p>
+<h2 id="4-register">4. Register</h2>
+<p>Stránka register slouží k registraci nových uživatelů. Obsahuje jak odkaz &quot;Have an account already?&quot; vedoucí zpět na stránku &quot;sign in&quot;, tak kolonky na údaje. Všechny údaje jsou povinné. Email musí být ve správném formátu a jméno nesmí obsahovat jiné znaky než písmena bez diakritiky. Hesla se musí shodovat.</p>
+<p><img src="http://wa.toad.cz/~jezekpe6/assets/doc/man_6.png" alt=""></p>
+<h2 id="5-view-post">5. View post</h2>
+<p>Tato stránka je náhled příspěvku. Sem se dostaneme klikem na příspěvek na hlavní straně blogu, nebo klikem na jméno příspěvku na stránka &quot;pages&quot; pro editory
+a adminy.
+Stránka obsahuje obrázek, název a datum přidání příspěvku a stejně tak jeho obsah. Pod příspěvkem nalezneme komentáře k příspěvku. Komentovat může přihlášený uživatel bez ohledu na jeho práva.</p>
+<p><img src="http://wa.toad.cz/~jezekpe6/assets/doc/man_7.png" alt=""></p>
+<h2 id="6-posts">6. Posts</h2>
+<p>Stránka posts je dostupná pouze pro uživatele role &quot;editor&quot; nebo &quot;admin&quot;. Dostaneme se na ní přes pravé horní menu. Stránka obsahuje příspěvky v kompaktní formě. Klikem na název příspěvku se dostaneme na jeho náhled. Záznam příspěvku dále obsahuje datum přidání a odkazy pro akce &quot;edit&quot;, &quot;delete JS&quot; a &quot;delete&quot;.
+Klikem na &quot;edit&quot; u příspěvku ho můžeme upravovat. Klikem na &quot;delete JS&quot; dostaneme alert okno, kdy po odsouhlasení smažeme příspěvek.</p>
+<p><img src="http://wa.toad.cz/~jezekpe6/assets/doc/man_8.png" alt=""></p>
+<p>Odkaz &quot;delete&quot; smaže příspěvek bez optání.
+Pod příspěvky se nachází tlačítko &quot;new post&quot;, kterým můžeme přidat nový příspěvek.</p>
+<h2 id="7-add-post">7. Add post</h2>
+<p>Tato stránka obsahuje pole pro název příspěvku, tlačítko pro výběr náhledového obrázku a pole pro obsah příspěvku. Název i obrázek jsou povinné, obsah povinný není. Stisktnutím tlačítka &quot;post&quot; příspěvek přidáme.</p>
+<p><img src="http://wa.toad.cz/~jezekpe6/assets/doc/man_9.png" alt=""></p>
+<h2 id="8-edit-post">8. Edit post</h2>
+<p>Stránka je téměř totožná se stránkou &quot;add post&quot;, jen bude již předvyplněná údaji z příspěvku který editujeme. Náhledový obrázek je z bezpečnostních důvodů nutno znovu vybrat i když ho původní příspěvek obsahoval.</p>
+<h2 id="9-users">9. Users</h2>
+<p>Stránka je dostupná jen pro uživatele role &quot;admin&quot;. Je přístupná z pravého horního rohu. Stránka obsahuje uživatelské údaje, konkrétně jméno, email a úroveň pravomocí. Pravomoci můžeme měnit pomocí dropdownu, při absenci JavaScriptu aplikujeme změnu tlačítkem &quot;update&quot; u uživatele, u kterého jsme změnili pravamoci.
+Tlačítkem pod uživateli se dostaneme na stránku registrace nového uživatele.</p>
+<p><img src="http://wa.toad.cz/~jezekpe6/assets/doc/man_10.png" alt=""></p>
+<p><a href="http://wa.toad.cz/~jezekpe6">zpět na blog</a></p>
+
+    </body>
+    </html>

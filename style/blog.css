@@ -1,0 +1,146 @@
+@keyframes fadeIn {
+  0% {
+    transform: translateY(15%);
+    filter: opacity(0);
+  }
+  50% {
+    transform: translateX(0);
+    filter: opacity(1);
+  }
+}
+
+@keyframes fadeInLater {
+  0% {
+    transform: translateY(15%);
+    filter: opacity(0);
+  }
+  33% {
+    transform: translateY(15%);
+    filter: opacity(0);
+  }
+  83% {
+    transform: translateY(0);
+    filter: opacity(1);
+  }
+}
+
+.latest-posts, .all-posts {
+    margin-top: 10%;
+    display: block;
+}
+
+.all-posts {
+  padding-bottom: 25px;
+}
+
+.post, .post-large {
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+}
+
+.post {
+  margin-bottom: 25px;
+  animation-fill-mode: both;
+  animation: 1s ease-out 0s 1 fadeInLater;
+}
+
+.post-large {
+    width: 90%;
+    animation-fill-mode: both;
+    animation: 1s ease-out 0s 1 fadeIn;
+}
+
+.post:before, .post-large:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.post > *, .post-large > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.post-thumbnail {
+  height: 200px;
+  width: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.5);
+  transition: all 0.3s ease-in-out;
+}
+
+.post-thumbnail:hover {
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,1);
+}
+
+.post-thumbnail img {
+  height: 200px;
+  width: 300px;
+  object-fit: cover;
+  transition: all 0.3s ease-in-out;
+}
+
+.post-thumbnail img:hover {
+  transform: scale(1.1);
+}
+
+.post-large .post-thumbnail {
+  height: 400px;
+  width: 400px;
+}
+
+.post-large .post-thumbnail img {
+  height: 400px;
+  width: 400px;
+}
+
+.post-content {
+    padding-left: 25px;
+    width: calc(100% - 335px);
+}
+
+.post-large .post-content {
+  width: calc(100% - 435px);
+}
+
+.post-meta {
+    color: rgb(200, 200, 200);
+    font-style: italic;
+}
+
+.button-readmore {
+  text-align: center;
+  width: 150px;
+  padding: 15px;
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  background: white;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.5);
+}
+
+.button-readmore:hover {
+  box-shadow: 0px 2px 10px 0px rgba(255, 255, 255, 1);
+}
+
+.pagination {
+  font-weight: bold;
+  text-align: center;
+  padding: 25px;
+}
+
+.pagination a, .pagination span {
+  padding: 5px 10px;
+  margin: 0 3px;
+}
+
+.pagination-current {
+  color: black;
+  background: white;
+  border-radius: 3px;
+}
