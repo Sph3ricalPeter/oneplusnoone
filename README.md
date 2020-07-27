@@ -18,3 +18,6 @@ not signed in (can view)
 
 ## Pre-defined user accounts (username, password, perms)
 1. (admin, admin, 2)
+
+# Credits
+The project is inspired by https://dcblog.dev/creating-a-blog-from-scratch-with-php
